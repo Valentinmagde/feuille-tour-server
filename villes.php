@@ -16,36 +16,36 @@
    	//Inclusion du fichier de la connexion à la base de données
 	include('config/c.php');
 	
-	// Modification des données d'une structure
+	// Modification des données d'une villes
 	// Contrainte {id}
 	if ($_POST['method']=="modif") {
 		$code = addslashes($_POST['code']);
-		$intitule = addslashes($_POST['intitule']);
+		$nom = addslashes($_POST['nom']);
 		$descriptif = addslashes($_POST['descriptif']);
 		$id = $_POST['id'];
-		mysqli_query($con,"UPDATE structure SET
-				code_structure = '".$code."',
-				intitule_structure = '".$intitule."',
-				descriptif_structure = '".$descriptif."'
-				WHERE id_structure = '".$id."'
-			") or die('erreur1');
+		mysqli_query($con,"UPDATE villes SET
+				code = '".$code."',
+				nom = '".$nom."',
+				descriptif = '".$descriptif."'
+				WHERE id = '".$id."'
+			") or die(mysqli_error($con));
 		echo 1;
 	}
 
-	// Création d'une structure
-	// Données requises {code, intitulé, descriptif}
+	// Création d'une ville
+	// Données requises {code, nom, descriptif}
 	elseif($_POST['method']=="creer"){	
-		mysqli_query($con,"INSERT INTO structure SET 
-				code_structure = '".addslashes($_POST['code'])."',
-				intitule_structure = '".addslashes($_POST['intitule'])."',
-				descriptif_structure = '".addslashes($_POST['descriptif'])."'
-			") or die('erreur1');
+		mysqli_query($con,"INSERT INTO villes SET
+				nom = '".addslashes($_POST['nom'])."', 
+				code = '".addslashes($_POST['code'])."',
+				descriptif = '".addslashes($_POST['descriptif'])."'
+			") or die(mysqli_error($con));
 		echo 2;
 	}
-	// Selection de la dernière structure en base
+	// Selection de la dernière ville en base
 	// Contrainte {id}
 	elseif($_POST['method']=="dernier"){
-		$result = mysqli_query($con,"SELECT * FROM structure WHERE id_structure IN (SELECT MAX(id_structure) FROM structure)") or die('erreur1');	
+		$result = mysqli_query($con,"SELECT * FROM villes WHERE id IN (SELECT MAX(id) FROM villes)") or die('erreur1');	
 
 			while($row = mysqli_fetch_array($result))
 			{
@@ -56,15 +56,15 @@
 			$jTableResult = $rows;
 			print json_encode($jTableResult);
 	}
-	// Suppression d'une structure en base
+	// Suppression d'une ville en base
 	elseif($_POST['method']=="suppr") {
-	mysqli_query($con,"DELETE FROM structure WHERE id_structure = '".$_POST['id']."'") or die('erreur1');
+	mysqli_query($con,"DELETE FROM villes WHERE id = '".$_POST['id']."'") or die('erreur1');
 	echo 3;
 	}
 
 	// Selection des toutes les données en base
 	else{
-		$result = mysqli_query($con,"SELECT * FROM structure ORDER BY id_structure DESC") or die('erreur1');	
+		$result = mysqli_query($con,"SELECT * FROM villes ORDER BY id DESC") or die('erreur1');	
 
 			while($row = mysqli_fetch_array($result))
 			{

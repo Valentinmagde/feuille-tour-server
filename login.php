@@ -43,7 +43,7 @@
 
       //Selection des données en base de l'utilisateur
       //Donées (identifiant et role)
-      $sql = "SELECT id_utilisateur, id_role, pass_utilisateur FROM utilisateur WHERE mail_utilisateur = '$myusername' and pass_utilisateur = '$mypassword'";
+      $sql = "SELECT id_utilisateur, id_role, pass_utilisateur FROM utilisateurs WHERE mail_utilisateur = '$myusername' and pass_utilisateur = '$mypassword'";
 
       // Execution de la requette
       $result = mysqli_query($con,$sql);

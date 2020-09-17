@@ -22,7 +22,7 @@
     }elseif ($_POST['k'] == 2) {
         $bd = "administration";
     }elseif ($_POST['k'] == 3) {
-        $bd = "structure";
+        $bd = "villes";
     }elseif ($_POST['k'] == 4) {
         $bd = "poste";
     }elseif ($_POST['k'] == 5) {
@@ -50,9 +50,9 @@
 
     if ($_POST['k'] == 7 || $_POST['k'] == 8) {
         $result = mysqli_query($con,"SELECT * FROM ".$bd."
-                                WHERE archive = 0") or die('erreur1');
+                                WHERE archive = 0") or die(mysqli_error($con));
     }else{
-        $result = mysqli_query($con,"SELECT * FROM ".$bd) or die('erreur1');
+        $result = mysqli_query($con,"SELECT * FROM ".$bd) or die(mysqli_error($con));
     }
 
 	while($row = mysqli_fetch_array($result))
