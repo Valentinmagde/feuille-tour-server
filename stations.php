@@ -36,13 +36,25 @@
 
 	// Création d'un programme
 	// Données requises {code, denommination, descriptif, année, responsable}	
-		mysqli_query($con,"INSERT INTO programme SET 
-				code_programme = '".addslashes($_POST['noProgramme'])."',
-				denomination_programme = '".addslashes($_POST['intituleProgramme'])."',
-				descriptif_programme = '".addslashes($_POST['descriptionProgramme'])."',
-				annee_programme = '".addslashes($_POST['anneeProgramme'])."',
-				id_responsable = '".addslashes($_POST['responsable'])."'
-			") or die('erreur1');
+		mysqli_query($con,"INSERT INTO stations SET 
+				nom = '".addslashes($_POST['nom'])."',
+				adresse = '".addslashes($_POST['adresse'])."',
+				latitude = '".addslashes($_POST['latitude'])."',
+				longitude = '".addslashes($_POST['longitude'])."',
+				mode_gestion = '".addslashes($_POST['modegestion'])."',
+				horaire_ouverture = '".addslashes($_POST['horaireouverture'])."',
+				nb_employes  = '".addslashes($_POST['nbemployes'])."',
+				installation  = '".addslashes($_POST['installation'])."',
+				baie_lavage  = '".addslashes($_POST['baielavage'])."',
+				baie_service  = '".addslashes($_POST['baieservice'])."',
+				type_volucompteur  = '".addslashes($_POST['typevolucompteur'])."',
+				type_cuve  = '".addslashes($_POST['typecuve'])."',
+				email  = '".addslashes($_POST['email'])."',
+				positionnement  = '".addslashes($_POST['positionnement'])."',
+				date_ouverture  = '".addslashes($_POST['dateouverture'])."',
+				id_ville = '".addslashes($_POST['listevilles'])."',
+				id_utilisateur = '".addslashes($_POST['listresponsables'])."'
+			") or die(mysqli_error($con));
 		echo 2;
 
 	}
@@ -82,25 +94,5 @@
 		print json_encode($jTableResult);
 
 	}
-	//Valider un programme
-	elseif($_POST['method']=="validerProgramme"){
-		mysqli_query($con,"UPDATE programme SET valide_programme = 1 WHERE annee_programme = '".$currentYear."' ") or die('erreur1');
-			echo 5;
-	}
-
-	// Selection des toutes les données en base
-	else{
-		$result = mysqli_query($con,"SELECT * FROM programme WHERE valide_programme = 0 ORDER BY id_programme ASC") or die('erreur2');	
-
-			while($row = mysqli_fetch_array($result))
-			{
-			    $rows[] = $row;
-			}
-		   //Return result to jTable
-			$jTableResult = array();
-			$jTableResult = $rows;
-			print json_encode($jTableResult);
-	}
-
 ?>
 

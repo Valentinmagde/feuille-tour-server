@@ -209,7 +209,7 @@
 		function is_already_in_use($field, $value, $table){
 			global $con;
 
-			$q = mysqli_query($con,"SELECT id_utilisateur FROM $table WHERE $field = '".$value."'") or die('erreur2');
+			$q = mysqli_query($con,"SELECT id_utilisateur FROM $table WHERE $field = '".$value."'") or die(mysqli_error($con));
 
 			$count = mysqli_fetch_array($q);
 

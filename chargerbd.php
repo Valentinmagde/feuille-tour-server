@@ -18,43 +18,28 @@
 
     // Vérification du paramettre k
 	if ($_POST['k'] == 1) {
-        $bd = "sexe";
-    }elseif ($_POST['k'] == 2) {
-        $bd = "administration";
+        $bd = "sexes";
     }elseif ($_POST['k'] == 3) {
         $bd = "villes";
-    }elseif ($_POST['k'] == 4) {
-        $bd = "poste";
-    }elseif ($_POST['k'] == 5) {
-        $bd = "type_structure";
-    }elseif ($_POST['k'] == 6) {
-        $bd = "programme";
-    }elseif ($_POST['k'] == 7) {
-        $bd = "activite";
-    }elseif ($_POST['k'] == 8) {
-        $bd = "action";
-    }elseif ($_POST['k'] == 9) {
-        $bd = "indicateur";
-    }elseif ($_POST['k'] == 10) {
-        $bd = "utilisateur";
+    }
+    elseif ($_POST['k'] == 4) {
+        $bd = "pompes";
+    }
+    elseif ($_POST['k'] == 5) {
+        $bd = "stations";
+    }
+    elseif ($_POST['k'] == 10) {
+        $bd = "utilisateurs";
     }
     elseif ($_POST['k'] == 11) {
-        $bd = "role";
-    }
-    elseif ($_POST['k'] == 12) {
-        $bd = "utilisateur";
+        $bd = "roles";
     }
     elseif ($_POST['k'] == 13) {
-        $bd = "notification";
+        $bd = "notifications";
     }
 
-    if ($_POST['k'] == 7 || $_POST['k'] == 8) {
-        $result = mysqli_query($con,"SELECT * FROM ".$bd."
-                                WHERE archive = 0") or die(mysqli_error($con));
-    }else{
-        $result = mysqli_query($con,"SELECT * FROM ".$bd) or die(mysqli_error($con));
-    }
-
+    $result = mysqli_query($con,"SELECT * FROM ".$bd) or die(mysqli_error($con));
+    $rows = array();
 	while($row = mysqli_fetch_array($result))
 	{
 	    $rows[] = $row;

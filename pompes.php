@@ -30,12 +30,13 @@
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
-	mysqli_query($con,"INSERT INTO action SET 
-			code_action = '".addslashes($_POST['code_action'])."',
-			denomination_action = '".addslashes($_POST['denomination_action'])."',
-			indicateur_action = '".addslashes($_POST['indicateur_action'])."',
-			id_programme = '".$_POST['denomination_programme']."'
-		") or die('erreur1');
+	mysqli_query($con,"INSERT INTO pompes SET 
+			nom = '".addslashes($_POST['nom'])."',
+			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
+			index_debut = '".addslashes($_POST['indexdebut'])."',
+			index_fin = '".addslashes($_POST['indexfin'])."',
+			id_station = '".$_POST['listestations']."'
+		") or die(mysqli_error($con));
 	echo 2;
 
 	// Selection de la dernière action en base

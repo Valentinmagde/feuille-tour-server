@@ -31,14 +31,13 @@
 
 	/*--- Modification d'un Utilisateur---*/
 	if ($_POST['method']=="modif") {
-		mysqli_query($con,"UPDATE utilisateur SET 
+		mysqli_query($con,"UPDATE utilisateurs SET 
 				nom_utilisateur = '".addslashes($_POST['nom'])."',
 				mail_utilisateur = '".addslashes($_POST['email'])."',
 				tel_utilisateur = '".addslashes($_POST['telephone'])."',
-				id_structure = '".addslashes($_POST['structure'])."',
 				id_role = '".addslashes($_POST['role'])."'
 				WHERE id_utilisateur = '".addslashes($_POST['id'])."'
-			") or die('erreur1');
+			") or die(mysqli_error($con));
 		echo 1;
 	}
 
@@ -58,7 +57,7 @@
 		}
 
 
-		if(is_already_in_use('mail_utilisateur', addslashes($_POST['email']), 'utilisateur')){
+		if(is_already_in_use('mail_utilisateur', addslashes($_POST['email']), 'utilisateurs')){
 			$errors[] = "Adresse Email déjà utilisée!";
 		}
 		if(count($errors)==0){
@@ -92,17 +91,21 @@
 			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 			
 			if($mail->send()) {
-				mysqli_query($con,"INSERT INTO utilisateur SET 
+				mysqli_query($con,"INSERT INTO utilisateurs SET 
 					nom_utilisateur = '".addslashes($_POST['nomPrenom'])."',
 					tel_utilisateur = '".addslashes($_POST['telephone'])."',
 					mail_utilisateur = '".addslashes($_POST['email'])."',
 					id_role = '".addslashes($_POST['poste'])."',
-					id_structure = '".addslashes($_POST['structure'])."',
 					sexe = '".addslashes($_POST['sexe'])."',
 					pass_utilisateur = '".addslashes(bcrypt_hash_password($_POST['password']))."'
-				") or die('erreur1');
+				") or die(mysqli_error($con));
 				echo 2;
-			} 
+			}else{
+				$errors[] = 'Echec d\'envoie de mail';
+
+				echo json_encode($errors);
+			}
+			
 		}else{
 			echo json_encode($errors);
 		}
@@ -111,7 +114,7 @@
 
 	/*--- Récupération du dernier Utilisateur ---*/
 	elseif($_POST['method']=="dernier"){
-		$result = mysqli_query($con,"SELECT * FROM utilisateur WHERE id_utilisateur IN (SELECT MAX(id_utilisateur) FROM utilisateur)") or die('erreur1');	
+		$result = mysqli_query($con,"SELECT * FROM utilisateurs WHERE id_utilisateur IN (SELECT MAX(id_utilisateur) FROM utilisateurs)") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
 			{
@@ -126,10 +129,10 @@
 
 	/*--- Suppresion d'un Utilisateur ---*/
 	elseif($_POST['method']=="suppr") {
-	mysqli_query($con,"DELETE FROM utilisateur WHERE id_utilisateur = '".$_POST['id']."'") or die('erreur1');
+	mysqli_query($con,"DELETE FROM utilisateurs WHERE id_utilisateur = '".$_POST['id']."'") or die(mysqli_error($con));
 	echo 3;
 	}else{
-		$result = mysqli_query($con,"SELECT * FROM utilisateur ORDER BY id_utilisateur DESC") or die('erreur1');	
+		$result = mysqli_query($con,"SELECT * FROM utilisateurs ORDER BY id_utilisateur DESC") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
 			{
