@@ -14,20 +14,17 @@
 	include('config/c.php');
 	include('include/functions.php');
 
+	// Import PHPMailer classes into the global namespace
+	// These must be at the top of your script, not inside a function
 	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\SMTP;
 	use PHPMailer\PHPMailer\Exception;
 
-	/* Exception class. */
-	require 'PHPMaile/src/Exception.php';
+	// Load Composer's autoloader
+	require 'vendor/autoload.php';
 
-	/* The main PHPMailer class. */
-	require 'PHPMaile/src/PHPMailer.php';
-
-	/* SMTP class, needed if you want to use SMTP. */
-	require 'PHPMaile/src/SMTP.php';
-	require 'mailer/vendor/autoload.php'; 
-
-	$email = new PHPMailer(TRUE);
+	// Instantiation and passing `true` enables exceptions
+	$mail = new PHPMailer(true);
 
 	/*--- Modification d'un Utilisateur---*/
 	if ($_POST['method']=="modif") {
@@ -63,7 +60,8 @@
 		if(count($errors)==0){
 			$mail = new PHPmailer();
 			//Server settings                     // Enable verbose debug output
-	        $mail->isSMTP();                                            // Send using SMTP
+			/* $mail->SMTPDebug = SMTP::DEBUG_SERVER;  */
+			$mail->isSMTP();                                            // Send using SMTP
 	        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
 	        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
 	        $mail->Username   = 'valentinmagde@gmail.com';                     // SMTP username
@@ -71,7 +69,7 @@
 	        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 	        $mail->Port       = 587;  
 
-			$mail->setFrom('valentinmagde@gmail.com', 'Feuille De Route'); //Personnaliser l'envoyeur
+			$mail->setFrom('valentinmagde@gmail.com', 'Feuille De Tour'); //Personnaliser l'envoyeur
 			$mail->addAddress(addslashes($_POST['email']), addslashes($_POST['nomPrenom'])); //Ajouter le destinataire
 			/*$mail->addAddress('To2@example.com'); 
 			$mail->addReplyTo('info@example.com', 'Information');*/ //L'adresse de réponse
@@ -82,9 +80,9 @@
 			/*$mail->addAttachment('/tmp/image.jpg', 'new.jpg');*/ 
 			/*$mail->isHTML(true);*/ // Paramétrer le format des emails en HTML ou non
 
-			$mail->Subject = 'Creation d\'un compte sur Feuille de route';
+			$mail->Subject = 'Creation d\'un compte sur Feuille de tour';
 			$mail->Body = "<b>Salut ".addslashes($_POST['nomPrenom']).",</b><br> 
-						   Vous etes desormais membre de la plateforme Feuille de route du Ministere de l'enseigment superieur.<br>
+						   Vous etes desormais membre de la plateforme Feuille de tour de la station total Tchad.<br>
 						   Vos informations :<br>
 						   <b>Pseudo:</b> ".addslashes($_POST['email'])."<br>
 						   <b>Mot de passe:</b> ".addslashes($_POST['password'])."";
@@ -96,12 +94,12 @@
 					tel_utilisateur = '".addslashes($_POST['telephone'])."',
 					mail_utilisateur = '".addslashes($_POST['email'])."',
 					id_role = '".addslashes($_POST['poste'])."',
-					sexe = '".addslashes($_POST['sexe'])."',
+					id_sexe = '".addslashes($_POST['sexe'])."',
 					pass_utilisateur = '".addslashes(bcrypt_hash_password($_POST['password']))."'
 				") or die(mysqli_error($con));
 				echo 2;
 			}else{
-				$errors[] = 'Echec d\'envoie de mail';
+				$errors[] = $mail->ErrorInfo;
 
 				echo json_encode($errors);
 			}
