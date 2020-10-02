@@ -32,6 +32,7 @@
 	}elseif($_POST['method']=="creer"){	
 	mysqli_query($con,"INSERT INTO pompes SET 
 			nom = '".addslashes($_POST['nom'])."',
+			prix = '".addslashes($_POST['prix'])."',
 			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
 			index_debut = '".addslashes($_POST['indexdebut'])."',
 			index_fin = '".addslashes($_POST['indexfin'])."',
