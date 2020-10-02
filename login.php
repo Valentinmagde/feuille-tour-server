@@ -43,28 +43,38 @@
 
       //Selection des données en base de l'utilisateur
       //Donées (identifiant et role)
-      $sql = "SELECT id_utilisateur, id_role, pass_utilisateur FROM utilisateurs WHERE mail_utilisateur = '$myusername' and pass_utilisateur = '$mypassword'";
+      $sql = "SELECT id_utilisateur, id_role, pass_utilisateur FROM utilisateurs WHERE mail_utilisateur = '$myusername'";
 
       // Execution de la requette
       $result = mysqli_query($con,$sql);
 
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
       $arr = [];
       
       $count = mysqli_num_rows($result);
       /*$user = $result->fetch(PDO::FETCH_OBJ);*/
       // If result matched $myusername and $mypassword, table row must be 1 row
       if($count == 1) {
-         $_SESSION['login_user'] = $myusername;
 
-        $arr[] = [1,$row['id_role'],$row['id_utilisateur'], $_POST['password']];
-        echo json_encode($arr);
+         if(password_verify($mypassword, $row['pass_utilisateur'])){
+          $_SESSION['login_user'] = $myusername;
+
+          $arr[] = [1,$row['id_role'],$row['id_utilisateur'], $_POST['password']];
+          echo json_encode($arr);
+         }
+         else {
+          $arr[] = [0];
+  
+          echo json_encode($arr);
+          $error = "Votre pseudo ou mot de passe est incorrect";
+        }
       }
       else {
         $arr[] = [0];
 
         echo json_encode($arr);
-        $error = "Votre pseudo ou mot de passe est incorrect";
+        $error = "Compte inexistant";
       }
    }
 

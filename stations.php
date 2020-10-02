@@ -54,8 +54,8 @@
 				date_ouverture  = '".addslashes($_POST['dateouverture'])."',
 				id_ville = '".addslashes($_POST['listevilles'])."',
 				id_gerant = '".addslashes($_POST['listresponsables'])."',
-				id_chef_pist = '".addslashes($_POST['listechefpiste'])."',
-				id_boutique = '".addslashes($_POST['listechefboutique'])."'
+				id_chef_piste = '".addslashes($_POST['listechefpiste'])."',
+				id_chef_boutique = '".addslashes($_POST['listechefboutique'])."'
 			") or die(mysqli_error($con));
 		echo 2;
 
