@@ -96,5 +96,28 @@
 		print json_encode($jTableResult);
 
 	}
+
+	/********* afficher la station d'un utilisateur *********/
+	elseif($_POST['method']=="get"){
+
+		/* echo $_POST['foreign']; */
+
+		$foreign_key = $_POST['foreign'];
+		$user_id = $_POST['user_id'];
+
+		$result = mysqli_query($con,"SELECT * FROM stations WHERE $foreign_key=$user_id") or die(mysqli_error($con));
+
+		while($row = mysqli_fetch_array($result))
+		{
+		    $rows[] = $row;
+		}
+	   //Return result to jTable
+		$jTableResult = array();
+		$jTableResult = $rows;
+		print json_encode($jTableResult);
+	}
+
+	
+
 ?>
 
