@@ -100,12 +100,12 @@
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'valentinmagde@gmail.com';                     // SMTP username
-        $mail->Password   = 'phpuserMAC45';                               // SMTP password
+        $mail->Username   = 'moudinearmel@gmail.com';                     // SMTP username
+        $mail->Password   = 'Bacd2013@@@@';                               // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port       = 587;           
       
-        $mail->setFrom('valentinmagde@gmail.com', 'Feuille De Route'); //Personnaliser l'envoyeur
+        $mail->setFrom('moudinearmel@gmail.com', 'Feuille De Route'); //Personnaliser l'envoyeur
         $mail->addAddress(addslashes($myusername), addslashes($row['nom_utilisateur'])); 
         $mail->Subject = 'Restoration du mot de passe';
         $mail->Body = "<b>Salut ".addslashes($row['nom_utilisateur']).",</b><br> 
