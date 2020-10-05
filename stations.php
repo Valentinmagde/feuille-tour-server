@@ -22,13 +22,16 @@
 	// Modification des données d'un programme
 	// Contrainte {id}
 	if ($_POST['method']=="modif") {
-		mysqli_query($con,"UPDATE programme SET 
-				code_programme = '".addslashes($_POST['code'])."',
-				denomination_programme = '".addslashes($_POST['intitule'])."',
-				descriptif_programme = '".addslashes($_POST['description'])."',
-				id_responsable = '".addslashes($_POST['responsable'])."'
-				WHERE id_programme = '".addslashes($_POST['id'])."'
-			") or die('erreur1');
+		mysqli_query($con,"UPDATE stations SET 
+				nom = '".addslashes($_POST['nom'])."',
+				adresse = '".addslashes($_POST['adresse'])."',
+				latitude = '".addslashes($_POST['latitude'])."',
+				longitude = '".addslashes($_POST['longitude'])."',
+				id_gerant = '".addslashes($_POST['gerant'])."',
+				id_chef_boutique = '".addslashes($_POST['chefboutique'])."',
+				id_chef_piste = '".addslashes($_POST['chefpiste'])."'
+				WHERE id = '".addslashes($_POST['id'])."'
+			") or die(mysqli_error($con));
 		echo 1;
 
 	}
@@ -78,23 +81,8 @@
 	}
 	// Suppression d'un programme en base
 	elseif($_POST['method']=="suppr") {
-	mysqli_query($con,"DELETE FROM programme WHERE id_programme = '".$_POST['id']."'") or die('erreur1');
-	echo 3;
-	}
-
-	//Selection des programmes validés
-	elseif($_POST['method']=="listeProgrammeValider"){
-		$result = mysqli_query($con,"SELECT * FROM programme WHERE valide_programme = 1 ORDER BY id_programme ASC") or die('erreur1');	
-
-		while($row = mysqli_fetch_array($result))
-		{
-		    $rows[] = $row;
-		}
-	   //Return result to jTable
-		$jTableResult = array();
-		$jTableResult = $rows;
-		print json_encode($jTableResult);
-
+		mysqli_query($con,"DELETE FROM stations WHERE id = '".$_POST['id']."'") or die('erreur1');
+		echo 3;
 	}
 
 	/********* afficher la station d'un utilisateur *********/
@@ -116,8 +104,5 @@
 		$jTableResult = $rows;
 		print json_encode($jTableResult);
 	}
-
-	
-
 ?>
 
