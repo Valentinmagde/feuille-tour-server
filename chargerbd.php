@@ -19,7 +19,11 @@
     // Vérification du paramettre k
 	if ($_POST['k'] == 1) {
         $bd = "sexes";
-    }elseif ($_POST['k'] == 3) {
+    }
+    elseif ($_POST['k'] == 2) {
+        $bd = "lavages";
+    }
+    elseif ($_POST['k'] == 3) {
         $bd = "villes";
     }
     elseif ($_POST['k'] == 4) {
