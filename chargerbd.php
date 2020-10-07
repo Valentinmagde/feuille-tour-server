@@ -32,6 +32,9 @@
     elseif ($_POST['k'] == 5) {
         $bd = "stations";
     }
+    elseif ($_POST['k'] == 6) {
+        $bd = "vidanges";
+    }
     elseif ($_POST['k'] == 10) {
         $bd = "utilisateurs";
     }

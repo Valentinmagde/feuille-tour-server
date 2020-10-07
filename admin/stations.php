@@ -14,7 +14,7 @@
 
 	//Inclusion des fichiers externes
 	//Inclusion du fichier de la connexion à la base de données
-	include('config/c.php');
+	include('../config/c.php');
 	
 	//Année en cours
 	$currentYear = date("Y");

@@ -11,8 +11,8 @@
  	/*---Pour permettre à un site de faire des demandes CORS sans utiliser le caractère générique "*" (par exemple, pour activer les informations d'identification), votre serveur doit lire la valeur de l'en-tête Origin de la demande et utiliser cette valeur pour définir Access-Control-Allow-Origin. doit également définir un en-tête Vary: Origin pour indiquer que certains en-têtes sont définis de manière dynamique en fonction de l'origine. ---*/
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
-	include('config/c.php');
-	include('include/functions.php');
+	include('../config/c.php');
+	include('../include/functions.php');
 
 	// Import PHPMailer classes into the global namespace
 	// These must be at the top of your script, not inside a function
@@ -21,7 +21,7 @@
 	use PHPMailer\PHPMailer\Exception;
 
 	// Load Composer's autoloader
-	require 'vendor/autoload.php';
+	require '../vendor/autoload.php';
 
 	// Instantiation and passing `true` enables exceptions
 	$mail = new PHPMailer(true);
@@ -64,8 +64,8 @@
 			$mail->isSMTP();                                            // Send using SMTP
 	        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
 	        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	        $mail->Username   = 'moudinearmel@gmail.com';                     // SMTP username
-	        $mail->Password   = 'Bacd2013@@@@';                               // SMTP password
+	        $mail->Username   = 'valentinmagde@gmail.com';                     // SMTP username
+	        $mail->Password   = 'phpuserMAC45';                               // SMTP password
 	        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 	        $mail->Port       = 587;  
 

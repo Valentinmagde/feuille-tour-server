@@ -18,12 +18,11 @@
 	// Modification des données d'une action
 	// Contrainte {id}
 	if ($_POST['method']=="modif") {
-	mysqli_query($con,"UPDATE pompes SET 
-			nom = '".addslashes($_POST['nom'])."',
+	mysqli_query($con,"UPDATE lavages SET 
+			imatricule_engin = '".addslashes($_POST['immatricule'])."',
 			prix = '".addslashes($_POST['prix'])."',
-			index_debut = '".addslashes($_POST['indexdebut'])."',
-			index_fin = '".addslashes($_POST['indexfin'])."',
-			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
+			date_lavage = '".addslashes($_POST['datelavage'])."',
+			type_engin = '".addslashes($_POST['typeengin'])."',
 			id_station = '".addslashes($_POST['station'])."'
 			WHERE id = '".addslashes($_POST['id'])."'
 		") or die(mysqli_error($con));
@@ -43,21 +42,8 @@
 
 	// Selection de la dernière action en base
 	// Contrainte {id}
-	}elseif($_POST['method']=="dernier"){
-		$result = mysqli_query($con,"SELECT * FROM action WHERE id_action IN (SELECT MAX(id_action) FROM action)") or die(mysqli_error($con));	
-
-			while($row = mysqli_fetch_array($result))
-			{
-			    $rows[] = $row;
-			}
-		   //Return result to jTable
-			$jTableResult = array();
-			$jTableResult = $rows;
-			print json_encode($jTableResult);
-
-	// Suppression d'une action en base
 	}elseif($_POST['method']=="suppr") {
-		mysqli_query($con,"DELETE FROM pompes WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		mysqli_query($con,"DELETE FROM lavages WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
 	}
 	// Selection des toutes les données en base

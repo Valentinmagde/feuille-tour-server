@@ -18,20 +18,17 @@
    include('include/functions.php');
    session_start();
 
-   use PHPMailer\PHPMailer\PHPMailer;
-   use PHPMailer\PHPMailer\Exception;
+  // Import PHPMailer classes into the global namespace
+  // These must be at the top of your script, not inside a function
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\SMTP;
+  use PHPMailer\PHPMailer\Exception;
 
-   /* Exception class. */
-   require 'PHPMaile/src/Exception.php';
+  // Load Composer's autoloader
+  require 'vendor/autoload.php';
 
-   /* The main PHPMailer class. */
-   require 'PHPMaile/src/PHPMailer.php';
-
-   /* SMTP class, needed if you want to use SMTP. */
-   require 'PHPMaile/src/SMTP.php';
-   require 'mailer/vendor/autoload.php'; 
-
-   $email = new PHPMailer(TRUE);
+  // Instantiation and passing `true` enables exceptions
+  $mail = new PHPMailer(true);
    
    // Connexion
    // Contrainte {email, mot de passe}
