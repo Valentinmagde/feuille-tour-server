@@ -18,14 +18,8 @@
 	// Modification des données d'une action
 	// Contrainte {id}
 	if ($_POST['method']=="modif") {
-	mysqli_query($con,"UPDATE pompes SET 
-			nom = '".addslashes($_POST['nom'])."',
-			prix = '".addslashes($_POST['prix'])."',
-			index_debut = '".addslashes($_POST['indexdebut'])."',
-			index_fin = '".addslashes($_POST['indexfin'])."',
-			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
-			id_station = '".addslashes($_POST['station'])."'
-			WHERE id = '".addslashes($_POST['id'])."'
+	mysqli_query($con,"UPDATE categories SET 
+			designation = '".addslashes($_POST['designation'])."'
 		") or die(mysqli_error($con));
 	echo 1;
 
@@ -33,14 +27,14 @@
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
 	mysqli_query($con,"INSERT INTO categories SET 
-			nom = '".addslashes($_POST['nom'])."'
-		") or die(mysqli_error($con));
+			designation = '".addslashes($_POST['desigation'])."'
+") or die(mysqli_error($con));
 	echo 2;
 
 	// Selection de la dernière action en base
 	// Contrainte {id}
 	}elseif($_POST['method']=="dernier"){
-		$result = mysqli_query($con,"SELECT * FROM action WHERE id_action IN (SELECT MAX(id_action) FROM action)") or die(mysqli_error($con));	
+		$result = mysqli_query($con,"SELECT * FROM categories WHERE id IN (SELECT MAX(id) FROM categories)") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
 			{
@@ -53,12 +47,12 @@
 
 	// Suppression d'une action en base
 	}elseif($_POST['method']=="suppr") {
-		mysqli_query($con,"DELETE FROM pompes WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		mysqli_query($con,"DELETE FROM categories WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
 	}
 	// Selection des toutes les données en base
 	else{
-		$result = mysqli_query($con,"SELECT * FROM pompes") or die(mysqli_error($con));	
+		$result = mysqli_query($con,"SELECT * FROM categories") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
 			{
