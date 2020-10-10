@@ -46,14 +46,23 @@
 		mysqli_query($con,"DELETE FROM lavages WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
 	}
+	/* Rejeté un lavage */
+	elseif($_POST['method']=="rejete") {
+		mysqli_query($con,"UPDATE lavages SET etat=2 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
+	}
+	/* Valider un lavage */
+	elseif($_POST['method']=="valide") {
+		mysqli_query($con,"UPDATE lavages SET etat=1 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
+	}
 
 	// Selection des tous les lavages d'un chef de piste en base
-	elseif($_POST['method']=="getlavagechefpiste"){
+	elseif($_POST['method']=="getlavagegestionnaire"){
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM lavages
-                    WHERE lavages.etat = 0
-                    AND lavages.id_station = '".$_POST['idstation']."'
+                    WHERE lavages.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))

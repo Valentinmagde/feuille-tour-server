@@ -46,14 +46,24 @@
 		mysqli_query($con,"DELETE FROM vidanges WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
 	}
+	/* Rejeter une vidange */
+	elseif($_POST['method']=="rejete") {
+		mysqli_query($con,"UPDATE vidanges SET etat=2 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
+	}
+
+	/* valider une vidange */
+	elseif($_POST['method']=="valide") {
+		mysqli_query($con,"UPDATE vidanges SET etat=1 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
+	}
 
 	// Selection des toutes les vidanges d'un chef de piste en base
-	elseif($_POST['method']=="getvidangechefpiste"){
+	elseif($_POST['method']=="getvidangegestionnaire"){
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM vidanges
-                    WHERE vidanges.etat = 0
-                    AND vidanges.id_station = '".$_POST['idstation']."'
+                    WHERE vidanges.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))

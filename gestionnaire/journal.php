@@ -58,6 +58,17 @@
 	}elseif($_POST['method']=="suppr") {
 		mysqli_query($con,"DELETE FROM historiquepompes WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
+	}
+	
+	/* Rejeter un journal */
+	elseif($_POST['method']=="rejete") {
+		mysqli_query($con,"UPDATE historiquepompes SET etat=2 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
+	}
+	/* Valider un journal */
+	elseif($_POST['method']=="valide") {
+		mysqli_query($con,"UPDATE historiquepompes SET etat=2 WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
+		echo 3;
     }
     
 	// Selection des toutes les pompes d'une station en base
@@ -75,7 +86,7 @@
     }
     
     // Selection des toutes les journaux d'un chef de piste en base
-	elseif($_POST['method']=="getjournalchefpiste"){
+	elseif($_POST['method']=="getjournalgestionnaire"){
 		$result = mysqli_query(
                     $con,
                     "SELECT
@@ -84,11 +95,10 @@
                         historiquepompes.index_initial, 
                         historiquepompes.index_final, 
                         historiquepompes.retour_cuve,
-                        historiquepompes.etat,
+						historiquepompes.etat,
                         historiquepompes.id_pompe
                     FROM historiquepompes, pompes
-                    WHERE historiquepompes.etat != 1
-                    AND historiquepompes.id_pompe = pompes.id
+                    WHERE historiquepompes.id_pompe = pompes.id
                     AND pompes.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
