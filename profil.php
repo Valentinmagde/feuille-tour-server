@@ -51,19 +51,17 @@
                     if(!file_exists($uploadDir)){
                       mkdir($uploadDir, 0755, true);
                     }
-
                     $fileName = basename($_FILES["avatar"]["name"]); 
                     $targetFilePath = $uploadDir . '/' . $fileName; 
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
 
                     $avatar = $targetFilePath;
-                     
                     // Allow certain file formats 
                     $allowTypes = array('jpg','JPG','png','PNG','JPEG','jpeg'); 
                     if(in_array($fileType, $allowTypes)){ 
                         // Upload file to the server 
                         if(move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)){ 
-                            $uploadedFile = $fileName; 
+                            $uploadedFile = $fileName;
                         }else{ 
                             $uploadStatus = 0; 
                             $response['message'] = 'Désolé, une erreur s\'est produite lors de l\'envoi de votre fichier.'; 
@@ -72,17 +70,17 @@
                         $uploadStatus = 0; 
                         $response['message'] = 'Désolé,seuls les fichiers JPG, JPEG et PNG sont autorisés à télécharger.'; 
                     } 
-                } 
-                 
+                }
+
                 if($uploadStatus == 1){ 
                      
                     // Insert form data in the database
                     
-                      $insert = $con->query("UPDATE utilisateur SET 
+                      $insert = $con->query("UPDATE utilisateurs SET 
                       nom_utilisateur = '".addslashes($name)."',
                       mail_utilisateur = '".addslashes($email)."',
                       tel_utilisateur = '".addslashes($tel)."',
-                      sexe = '".addslashes($sexe)."',
+                      id_sexe = '".addslashes($sexe)."',
                       pass_utilisateur = '".addslashes(bcrypt_hash_password($password))."',
                       avatar = '".addslashes($avatar)."'
                       WHERE id_utilisateur = '".addslashes($_POST['id'])."'"); 
