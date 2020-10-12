@@ -64,8 +64,8 @@
 			$mail->isSMTP();                                            // Send using SMTP
 	        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
 	        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	        $mail->Username   = 'valentinmagde@gmail.com';                     // SMTP username
-	        $mail->Password   = 'phpuserMAC45';                               // SMTP password
+	        $mail->Username   = 'Moudinearmel@gmail.com';                     // SMTP username
+	        $mail->Password   = 'bacd2013@@@@';                               // SMTP password
 	        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 	        $mail->Port       = 587;  
 
@@ -127,7 +127,7 @@
 
 	/*--- Suppresion d'un Utilisateur ---*/
 	elseif($_POST['method']=="suppr") {
-	mysqli_query($con,"DELETE FROM utilisateurs WHERE id_utilisateur = '".$_POST['id']."'") or die(mysqli_error($con));
+	mysqli_query($con,"DELETE FROM utilisateurs WHERE id_utilisateur = '".$_POST['id_utilisateur']."'") or die(mysqli_error($con));
 	echo 3;
 	}else{
 		$result = mysqli_query($con,"SELECT * FROM utilisateurs ORDER BY id_utilisateur DESC") or die(mysqli_error($con));	
