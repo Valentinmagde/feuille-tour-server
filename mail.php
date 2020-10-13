@@ -19,12 +19,12 @@
 	// Création d'une notification
 	// Données requises {sujet, contenu, indentifiant emetteur, indentifiant recepteur}
 	if ($_POST['method']=="creer") {
-		mysqli_query($con,"INSERT INTO notification SET 
+		mysqli_query($con,"INSERT INTO notifications SET 
 			sujet_notif = '".addslashes($_POST['sujet'])."',
 			contenu_notif = '".addslashes($_POST['contenu'])."',
 			id_emetteur = '".addslashes($_POST['id_emetteur'])."',
 			id_recepteur = '".addslashes($_POST['id_recepteur'])."'
-		") or die('erreur1');
+		") or die(mysqli_error($con));
 		
 		echo 1;
 	}
@@ -32,10 +32,10 @@
 	// Modification des données d'une notification
 	// Contrainte {id}
 	else if ($_POST['method']=="modif") {
-	mysqli_query($con,"UPDATE notification SET
+	mysqli_query($con,"UPDATE notifications SET
 			lecture_notif = '".addslashes($_POST['valeur'])."'
 			WHERE id_notif = '".addslashes($_POST['id'])."'
-		") or die('erreur1');
+		") or die(mysqli_error($con));
 	echo 1;
 	}
 
@@ -44,14 +44,14 @@
 	// Contrainte {id}
 	// Valeur {1,2,3,4}
 	else if ($_POST['method']=="changer") {
-		mysqli_query($con,"UPDATE notification SET
+		mysqli_query($con,"UPDATE notifications SET
 				status_notif = '".addslashes($_POST['valeur'])."'
 				WHERE id_notif = '".addslashes($_POST['id'])."'
-			") or die('erreur1');
+			") or die(mysqli_error($con));
 		echo 1;
 	}
 	else{
-		$result = mysqli_query($con,"SELECT * FROM notification ORDER BY id_notif DESC") or die('erreur1');	
+		$result = mysqli_query($con,"SELECT * FROM notifications ORDER BY id_notif DESC") or die(mysqli_error($con));	
 
 		while($row = mysqli_fetch_array($result))
 		{
