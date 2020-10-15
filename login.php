@@ -1,11 +1,11 @@
 <?php
     
   /*
-    * Projet : FEUILLE DE ROUTE MINESUP
+    * Projet : FEUILLE DE TOUR
     * Code PHP : login.php (login page)
     ************************************************
-    * Auteur : Valentin Magde,Demasso James,Nebo Djomche Joress
-    * E-mails : <valentinmagde@gmail.com>
+    * Auteur : Moudine 
+    * E-mails : <Moudinearmel@gmail.com>
   */
 
    /*---Pour permettre à un site de faire des demandes CORS sans utiliser le caractère générique "*" (par exemple, pour activer les informations d'identification), votre serveur doit lire la valeur de l'en-tête Origin de la demande et utiliser cette valeur pour définir Access-Control-Allow-Origin. doit également définir un en-tête Vary: Origin pour indiquer que certains en-têtes sont définis de manière dynamique en fonction de l'origine. ---*/
@@ -102,7 +102,7 @@
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port       = 587;           
       
-        $mail->setFrom('moudinearmel@gmail.com', 'Feuille De Route'); //Personnaliser l'envoyeur
+        $mail->setFrom('moudinearmel@gmail.com', 'Feuille De Tour'); //Personnaliser l'envoyeur
         $mail->addAddress(addslashes($myusername), addslashes($row['nom_utilisateur'])); 
         $mail->Subject = 'Restoration du mot de passe';
         $mail->Body = "<b>Salut ".addslashes($row['nom_utilisateur']).",</b><br> 

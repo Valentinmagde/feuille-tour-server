@@ -33,12 +33,13 @@
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
 	mysqli_query($con,"INSERT INTO produits SET 
-			nom = '".addslashes($_POST['nom'])."',
             prix = '".addslashes($_POST['prix'])."',
+			reference = '".addslashes($_POST['reference'])."',
 			designation = '".addslashes($_POST['designation'])."',
-			qte = '".addslashes($_POST['qte'])."',
-			qteA = '".addslashes($_POST['qteA'])."',
-			id_categorie = '".$_POST['listescategories']."'
+			poids = '".addslashes($_POST['poids'])."',
+			quantite = '".addslashes($_POST['qte'])."',
+			quantite_alert = '".addslashes($_POST['qteA'])."',
+			id_categorie = '".$_POST['listecategories']."'
 			id_station = '".$_POST['listestations']."'
 		") or die(mysqli_error($con));
 	echo 2;
