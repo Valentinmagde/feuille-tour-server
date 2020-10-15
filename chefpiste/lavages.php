@@ -36,6 +36,8 @@
 			prix = '".addslashes($_POST['prix'])."',
 			type_engin = '".addslashes($_POST['typeengin'])."',
 			date_lavage = '".addslashes($_POST['datelavage'])."',
+			heure_debut = '".addslashes($_POST['heuredebut'])."',
+			heure_fin = '".addslashes($_POST['heurefin'])."',
 			id_station = '".$_POST['listestations']."'
 		") or die(mysqli_error($con));
 	echo 2;
@@ -52,7 +54,7 @@
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM lavages
-                    WHERE lavages.etat = 0
+                    WHERE lavages.etat != 1
                     AND lavages.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 

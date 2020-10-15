@@ -36,6 +36,8 @@
 			qualite_huile = '".addslashes($_POST['qualitehuile'])."',
 			filtre = '".addslashes($_POST['filtre'])."',
 			date_vidange = '".addslashes($_POST['datevidange'])."',
+			heure_debut = '".addslashes($_POST['heuredebut'])."',
+			heure_fin = '".addslashes($_POST['heurefin'])."',
 			id_station = '".$_POST['listestations']."'
 		") or die(mysqli_error($con));
 	echo 2;
@@ -52,7 +54,7 @@
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM vidanges
-                    WHERE vidanges.etat = 0
+                    WHERE vidanges.etat != 1
                     AND vidanges.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 

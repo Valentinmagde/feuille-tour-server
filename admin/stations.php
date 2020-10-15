@@ -94,7 +94,8 @@
 		$user_id = $_POST['user_id'];
 
 		$result = mysqli_query($con,"SELECT * FROM stations WHERE $foreign_key=$user_id") or die(mysqli_error($con));
-
+		
+		$rows = [];
 		while($row = mysqli_fetch_array($result))
 		{
 		    $rows[] = $row;
