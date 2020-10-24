@@ -18,10 +18,12 @@
 	// Modification des données d'une action
 	// Contrainte {id}
 	if ($_POST['method']=="modif") {
-	mysqli_query($con,"UPDATE categories SET 
-			designation = '".addslashes($_POST['designation'])."'
-		") or die(mysqli_error($con));
-	echo 1;
+		$id = $_POST['id'];
+	mysqli_query($con,"UPDATE categories SET
+				designation = '".addslashes($_POST['designation'])."'
+				WHERE id = '".$id."'
+			") or die(mysqli_error($con));
+		echo 1;
 
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}

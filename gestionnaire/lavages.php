@@ -74,6 +74,22 @@
 			$jTableResult = $rows;
 			print json_encode($jTableResult);
 	}
+	
+	// Selection le nombre des  lavages d'un chef de piste en base
+	elseif($_POST['method']=="getnombrelavagegestionnaire"){
+		$result = mysqli_query(
+                    $con,
+                    "SELECT COUNT(*) FROM lavages
+                    WHERE lavages.id_station = '".$_POST['idstation']."'
+                    ") or die(mysqli_error($con));	
+
+				$row = $result->fetch_assoc();
+				$jTableResult = array();
+				$jTableResult = $row;
+				print json_encode($jTableResult);
+
+						
+	}
 	// Selection des toutes les données en base
 	else{
 		$result = mysqli_query($con,"SELECT * FROM pompes") or die(mysqli_error($con));	
