@@ -62,7 +62,20 @@
     
 	// Selection des toutes les pompes d'une station en base
 	elseif($_POST['method']=="pompes"){
-		$result = mysqli_query($con,"SELECT * FROM pompes WHERE id_station = '".$_POST['id']."'") or die(mysqli_error($con));	
+		$result = mysqli_query($con,
+			"SELECT 
+				pompes.id,
+				pompes.nom,
+				pompes.type_volucompteur,
+				pompes.num_pompe,
+				pompes.prix,
+				pompes.index_debut,
+				pompes.index_fin,
+				pompes.id_citerne
+			FROM pompes, citernes 
+			WHERE pompes.id_citerne = citernes.id
+			AND citernes.id_station = '".$_POST['id']."'
+			") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
 			{
@@ -86,10 +99,11 @@
                         historiquepompes.retour_cuve,
                         historiquepompes.etat,
                         historiquepompes.id_pompe
-                    FROM historiquepompes, pompes
+                    FROM historiquepompes, pompes, citernes
                     WHERE historiquepompes.etat != 1
                     AND historiquepompes.id_pompe = pompes.id
-                    AND pompes.id_station = '".$_POST['idstation']."'
+                    AND pompes.id_citerne = citernes.id
+					AND citernes.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))
