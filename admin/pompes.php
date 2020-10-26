@@ -24,7 +24,7 @@
 			index_debut = '".addslashes($_POST['indexdebut'])."',
 			index_fin = '".addslashes($_POST['indexfin'])."',
 			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
-			id_station = '".addslashes($_POST['station'])."'
+			id_citerne = '".addslashes($_POST['citerne'])."'
 			WHERE id = '".addslashes($_POST['id'])."'
 		") or die(mysqli_error($con));
 	echo 1;
@@ -38,7 +38,7 @@
 			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
 			index_debut = '".addslashes($_POST['indexdebut'])."',
 			index_fin = '".addslashes($_POST['indexfin'])."',
-			id_station = '".$_POST['listestations']."'
+			id_citerne = '".$_POST['listeciternes']."'
 		") or die(mysqli_error($con));
 	echo 2;
 

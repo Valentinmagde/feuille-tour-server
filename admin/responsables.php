@@ -32,6 +32,7 @@
 				nom_utilisateur = '".addslashes($_POST['nom'])."',
 				mail_utilisateur = '".addslashes($_POST['email'])."',
 				tel_utilisateur = '".addslashes($_POST['telephone'])."',
+				id_sexe = '".addslashes($_POST['sexe'])."',
 				id_role = '".addslashes($_POST['role'])."'
 				WHERE id_utilisateur = '".addslashes($_POST['id'])."'
 			") or die(mysqli_error($con));

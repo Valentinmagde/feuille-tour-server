@@ -51,6 +51,10 @@
         $bd = "notifications";
     }
 
+    elseif ($_POST['k'] == 14) {
+        $bd = "citernes";
+    }
+
     $result = mysqli_query($con,"SELECT * FROM ".$bd) or die(mysqli_error($con));
     $rows = array();
 	while($row = mysqli_fetch_array($result))
