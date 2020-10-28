@@ -38,6 +38,9 @@
     elseif ($_POST['k'] == 7) {
         $bd = "categories";
     }
+    elseif ($_POST['k'] == 8) {
+        $bd = "produits";
+    }
     elseif ($_POST['k'] == 10) {
         $bd = "utilisateurs";
     }

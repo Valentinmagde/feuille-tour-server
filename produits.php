@@ -37,10 +37,11 @@
 			reference = '".addslashes($_POST['reference'])."',
 			designation = '".addslashes($_POST['designation'])."',
 			poids = '".addslashes($_POST['poids'])."',
-			quantite = '".addslashes($_POST['qte'])."',
-			quantite_alert = '".addslashes($_POST['qteA'])."',
-			id_categorie = '".$_POST['listecategories']."'
-			id_station = '".$_POST['listestations']."'
+			quantite = '".addslashes($_POST['quantite'])."',
+			code = '".addslashes($_POST['code'])."',
+			quantite_alert = '".addslashes($_POST['quantite_alert'])."',
+			id_categorie = '".$_POST['id_categorie']."',
+			id_station = '".$_POST['id_station']."'
 		") or die(mysqli_error($con));
 	echo 2;
 
