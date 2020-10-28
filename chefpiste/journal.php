@@ -31,12 +31,18 @@
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
-	mysqli_query($con,"INSERT INTO historiquepompes SET 
+		mysqli_query($con,"INSERT INTO historiquepompes SET 
 			date= '".addslashes($_POST['date'])."',
 			retour_cuve = '".addslashes($_POST['retourcuve'])."',
 			index_initial = '".addslashes($_POST['indexdebut'])."',
 			index_final = '".addslashes($_POST['indexfin'])."',
 			id_pompe = '".$_POST['listespompes']."'
+		") or die(mysqli_error($con));
+
+		mysqli_query($con,
+			"UPDATE stocke_citerne SET 
+			quantite_stocke = '".addslashes($_POST['indexfin'])."'
+			WHERE id_citerne = '".addslashes($_POST['citerne'])."'
 		") or die(mysqli_error($con));
 	echo 2;
 
