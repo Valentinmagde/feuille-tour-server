@@ -102,5 +102,48 @@
 			$jTableResult = $rows;
 			print json_encode($jTableResult);
 	}
+
+	// Selection des toutes les vidanges de la semaine en cours
+	if($_POST['method']=="filtrevidangessemainecourante"){
+        $id = $_POST['idstation'];
+
+		$result = mysqli_query(
+                    $con,
+                    "SELECT * FROM vidanges
+					WHERE WEEK(date_vidange) = '".$_POST['semainecourante']."'
+					AND id_station = $id
+                    ") or die(mysqli_error($con));
+
+            $rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+			    $rows[] = $row;
+			}
+		   //Return result to jTable
+			$jTableResult = array();
+			$jTableResult = $rows;
+			print json_encode($jTableResult);
+	}
+	// Selection des toutes les lavage de la semaine en cours
+	if($_POST['method']=="filtrelavagesssemainecourante"){
+        $id = $_POST['idstation'];
+
+		$result = mysqli_query(
+                    $con,
+                    "SELECT * FROM lavages
+					WHERE WEEK(date_lavage) = '".$_POST['semainecourante']."'
+					AND id_station = $id
+                    ") or die(mysqli_error($con));
+
+            $rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+			    $rows[] = $row;
+			}
+		   //Return result to jTable
+			$jTableResult = array();
+			$jTableResult = $rows;
+			print json_encode($jTableResult);
+	}
 ?>
 
