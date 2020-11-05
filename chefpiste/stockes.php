@@ -32,6 +32,8 @@
 			quantite_stocke = '".addslashes($_POST['quantite'])."',
 			date_creation = '".addslashes($_POST['datecreation'])."',
 			id_citerne = '".$_POST['citerne']."'
+			ON DUPLICATE KEY UPDATE
+			quantite_stocke = quantite_stocke + '".addslashes($_POST['quantite'])."'
 		") or die(mysqli_error($con));
 	echo 2;
 
@@ -74,6 +76,7 @@
                     AND citernes.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
+			$rows = [];
 			while($row = mysqli_fetch_array($result))
 			{
 			    $rows[] = $row;

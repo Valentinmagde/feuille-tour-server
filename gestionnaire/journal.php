@@ -97,9 +97,10 @@
                         historiquepompes.retour_cuve,
 						historiquepompes.etat,
                         historiquepompes.id_pompe
-                    FROM historiquepompes, pompes
+                    FROM historiquepompes, pompes, citernes
                     WHERE historiquepompes.id_pompe = pompes.id
-                    AND pompes.id_station = '".$_POST['idstation']."'
+                    AND pompes.id_citerne = citernes.id
+					AND citernes.id_station = '".$_POST['idstation']."'
                     ") or die(mysqli_error($con));	
 
 			while($row = mysqli_fetch_array($result))

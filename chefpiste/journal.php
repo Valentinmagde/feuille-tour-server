@@ -31,7 +31,11 @@
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
+<<<<<<< HEAD
 		$stock_reel=$_POST['indexfin']-$_POST['indexdebut'];
+=======
+		$stocke_reel = $_POST['indexfin'] - $_POST['indexdebut'];
+>>>>>>> 9294c43f761d95e7776494ce44e2dd3cf8aba6ba
 		mysqli_query($con,"INSERT INTO historiquepompes SET 
 			date= '".addslashes($_POST['date'])."',
 			retour_cuve = '".addslashes($_POST['retourcuve'])."',
@@ -42,7 +46,7 @@
 
 		mysqli_query($con,
 			"UPDATE stocke_citerne SET 
-			quantite_stocke = '".addslashes($_POST['indexfin'])."'
+			quantite_stocke = quantite_stocke - $stocke_reel + '".addslashes($_POST['retourcuve'])."'
 			WHERE id_citerne = '".addslashes($_POST['citerne'])."'
 		") or die(mysqli_error($con));
 	echo 2;
