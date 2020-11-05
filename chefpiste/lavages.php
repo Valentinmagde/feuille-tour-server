@@ -38,6 +38,7 @@
 			date_lavage = '".addslashes($_POST['datelavage'])."',
 			heure_debut = '".addslashes($_POST['heuredebut'])."',
 			heure_fin = '".addslashes($_POST['heurefin'])."',
+			type_lavage = '".addslashes($_POST['typelavage'])."',
 			id_station = '".$_POST['listestations']."'
 		") or die(mysqli_error($con));
 	echo 2;
