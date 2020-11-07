@@ -89,7 +89,7 @@
 	elseif($_POST['method']=="getjournalgestionnaire"){
 		$result = mysqli_query(
                     $con,
-                    "SELECT
+                    "SELECT 
                         historiquepompes.id,
                         historiquepompes.date, 
                         historiquepompes.index_initial, 
