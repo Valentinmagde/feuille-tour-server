@@ -110,7 +110,7 @@
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM vidanges
-					WHERE WEEK(date_vidange) = '".$_POST['semainecourante']."'
+					WHERE WEEKOFYEAR(date_vidange) = '".$_POST['semainecourante']."'
 					AND id_station = $id
                     ") or die(mysqli_error($con));
 
@@ -125,13 +125,13 @@
 			print json_encode($jTableResult);
 	}
 	// Selection des toutes les lavage de la semaine en cours
-	if($_POST['method']=="filtrelavagesssemainecourante"){
+	if($_POST['method']=="filtrelavagessemainecourante"){
         $id = $_POST['idstation'];
 
 		$result = mysqli_query(
                     $con,
                     "SELECT * FROM lavages
-					WHERE WEEK(date_lavage) = '".$_POST['semainecourante']."'
+					WHERE WEEKOFYEAR(date_lavage) = '".$_POST['semainecourante']."'
 					AND id_station = $id
                     ") or die(mysqli_error($con));
 
