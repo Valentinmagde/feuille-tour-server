@@ -45,6 +45,13 @@
 			quantite_stocke = quantite_stocke - $stocke_reel + '".addslashes($_POST['retourcuve'])."'
 			WHERE id_citerne = '".addslashes($_POST['citerne'])."'
 		") or die(mysqli_error($con));
+
+		mysqli_query($con,
+			"UPDATE pompes SET 
+			index_debut = '".addslashes($_POST['indexdebut'])."',
+			index_fin = '".addslashes($_POST['indexfin'])."'
+			WHERE id = '".addslashes($_POST['listespompes'])."'
+		") or die(mysqli_error($con));
 	echo 2;
 
 	// Selection de la dernière action en base

@@ -38,6 +38,7 @@
 			type_volucompteur = '".addslashes($_POST['typevolucompteur'])."',
 			index_debut = '".addslashes($_POST['indexdebut'])."',
 			index_fin = '".addslashes($_POST['indexfin'])."',
+			produit = '".addslashes($_POST['produit'])."',
 			id_citerne = '".$_POST['listeciternes']."'
 		") or die(mysqli_error($con));
 	echo 2;
