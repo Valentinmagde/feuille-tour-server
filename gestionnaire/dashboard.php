@@ -145,5 +145,34 @@
 			$jTableResult = $rows;
 			print json_encode($jTableResult);
 	}
+
+	/* Seletionner tous les pompes qui ont mise à jour aujourd'hui */
+	if($_POST['method']=="getupdatepompegestionnaire"){
+		$result = mysqli_query(
+						$con,
+						"SELECT 
+							pompes.id,
+							pompes.index_debut,
+							pompes.index_fin,
+							pompes.produit,
+							pompes.prix,
+							stations.id
+						FROM pompes, citernes, stations
+						WHERE pompes.date_mise_a_jour = CURDATE()
+						AND pompes.id_citerne = citernes.id
+						AND citernes.id_station = '".$_POST['idstation']."'
+						GROUP BY pompes.id
+                    ") or die(mysqli_error($con));
+
+            $rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+			    $rows[] = $row;
+			}
+		   //Return result to jTable
+			$jTableResult = array();
+			$jTableResult = $rows;
+			print json_encode($jTableResult);
+	}
 ?>
 

@@ -31,7 +31,7 @@
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}
 	}elseif($_POST['method']=="creer"){	
-		$stock_reel=$_POST['indexfin']-$_POST['indexdebut'];
+		$stocke_reel=$_POST['indexfin']-$_POST['indexdebut'];
 		mysqli_query($con,"INSERT INTO historiquepompes SET 
 			date= '".addslashes($_POST['date'])."',
 			retour_cuve = '".addslashes($_POST['retourcuve'])."',
