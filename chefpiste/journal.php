@@ -47,6 +47,12 @@
 		") or die(mysqli_error($con));
 
 		mysqli_query($con,
+			"UPDATE citernes SET 
+			quantite_stocke = quantite_stocke - $stocke_reel + '".addslashes($_POST['retourcuve'])."'
+			WHERE id = '".addslashes($_POST['citerne'])."'
+		") or die(mysqli_error($con));
+
+		mysqli_query($con,
 			"UPDATE pompes SET 
 			index_debut = '".addslashes($_POST['indexdebut'])."',
 			index_fin = '".addslashes($_POST['indexfin'])."'

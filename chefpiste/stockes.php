@@ -35,6 +35,12 @@
 			ON DUPLICATE KEY UPDATE
 			quantite_stocke = quantite_stocke + '".addslashes($_POST['quantite'])."'
 		") or die(mysqli_error($con));
+
+		mysqli_query($con,
+			"UPDATE citernes SET 
+			quantite_stocke = quantite_stocke + '".addslashes($_POST['quantite'])."'
+			WHERE id = '".addslashes($_POST['citerne'])."'
+		") or die(mysqli_error($con));
 	echo 2;
 
 	// Selection de la dernière action en base

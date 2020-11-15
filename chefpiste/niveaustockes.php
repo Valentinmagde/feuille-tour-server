@@ -30,16 +30,14 @@
 	}elseif($_POST['method']=="creer"){	
 	mysqli_query($con,
 			"INSERT INTO stocke_jauge SET 
-			stocke_reel_initial = '".addslashes($_POST['initial'])."',
-			stocke_reel_final = '".addslashes($_POST['final'])."',
+			stocke_jauge = '".addslashes($_POST['initial'])."',
 			date_stocke = '".addslashes($_POST['datecreation'])."',
 			id_citerne = '".$_POST['citerne']."'
 		") or die(mysqli_error($con));
 
 	mysqli_query($con,
 		"UPDATE citernes SET 
-		stocke_reel_initial = '".addslashes($_POST['initial'])."',
-		stocke_reel_final = '".addslashes($_POST['final'])."'
+		stocke_jauge = '".addslashes($_POST['initial'])."'
 		WHERE id = '".addslashes($_POST['citerne'])."'
 	") or die(mysqli_error($con));
 	echo 2;
@@ -74,8 +72,7 @@
                     $con,
                     "SELECT 
                         stocke_jauge.id,
-                        stocke_jauge.stocke_reel_initial,
-						stocke_jauge.stocke_reel_final,
+						stocke_jauge.stocke_jauge,
                         stocke_jauge.date_stocke,
                         stocke_jauge.id_citerne
                     FROM stocke_jauge, citernes
