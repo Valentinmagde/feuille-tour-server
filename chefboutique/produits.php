@@ -31,8 +31,9 @@
 
 	// Création d'une action
 	// Données requises {code, denomination, indicateur, programme}
-	}elseif($_POST['method']=="creer"){	
-	mysqli_query($con,"INSERT INTO produits SET 
+	}
+	elseif($_POST['method']=="creer"){	
+		mysqli_query($con,"INSERT INTO produits SET 
             prix = '".addslashes($_POST['prix'])."',
 			reference = '".addslashes($_POST['reference'])."',
 			designation = '".addslashes($_POST['designation'])."',
@@ -42,6 +43,14 @@
 			quantite_alert = '".addslashes($_POST['quantite_alert'])."',
 			id_categorie = '".$_POST['id_categorie']."',
 			id_station = '".$_POST['id_station']."'
+		") or die(mysqli_error($con));
+
+		$id_produit = mysqli_insert_id($con);
+
+		mysqli_query($con,"INSERT INTO stockes SET 
+			quantite_stocke = '".addslashes($_POST['quantite'])."',
+			stocke_alerte = '".addslashes($_POST['quantite_alert'])."',
+			id_produit = $id_produit
 		") or die(mysqli_error($con));
 	echo 2;
 
