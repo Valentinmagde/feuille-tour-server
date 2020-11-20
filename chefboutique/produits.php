@@ -13,7 +13,7 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	//Inclusion du fichier de la connexion à la base de données
-	include('config/c.php');
+	include('../config/c.php');
 
 	// Modification des données d'une action
 	// Contrainte {id}
@@ -63,7 +63,29 @@
 	}elseif($_POST['method']=="suppr") {
 		mysqli_query($con,"DELETE FROM pompes WHERE id = '".$_POST['id']."'") or die(mysqli_error($con));
 		echo 3;
-	}
+	}// Selection des toutes les pompes d'une station en base
+	elseif($_POST['method']=="listeproduit"){
+		$result = mysqli_query($con,
+			"SELECT 
+				produits.id,
+				produits.designation,
+				produits.prix,
+				produits.quantite,
+				produits.quantite_alert
+				
+			FROM produits
+			WHERE id =id
+			") or die(mysqli_error($con));	
+
+			while($row = mysqli_fetch_array($result))
+			{
+			    $rows[] = $row;
+			}
+		   //Return result to jTable
+			$jTableResult = array();
+			$jTableResult = $rows;
+			print json_encode($jTableResult);
+    }
 	// Selection des toutes les données en base
 	else{
 		$result = mysqli_query($con,"SELECT * FROM pompes") or die(mysqli_error($con));	

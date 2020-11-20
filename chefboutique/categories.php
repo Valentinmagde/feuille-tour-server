@@ -13,7 +13,7 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	//Inclusion du fichier de la connexion à la base de données
-	include('config/c.php');
+	include('../config/c.php');
 
 	// Modification des données d'une action
 	// Contrainte {id}
