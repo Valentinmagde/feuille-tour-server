@@ -52,5 +52,53 @@
 		// Selection de la dernière action en base
 		// Contrainte {id}
 		}
+		/* Enregistrer une vente */
+		elseif($_POST['method']=="enregistrervente"){
+			$ventes = json_decode(stripslashes($_POST['vente']));
+			$nbre_article = sizeof($ventes);
+
+			mysqli_query($con,"INSERT INTO achatsventes SET 
+					total_vente = '".addslashes($_POST['total'])."',
+					nom_client = '".addslashes($_POST['client'])."',
+					nombre_article = $nbre_article,
+					type_commande = '".addslashes($_POST['typecmd'])."'
+				") or die(mysqli_error($con));
+
+			$id_achatvente = mysqli_insert_id($con);
+
+			mysqli_query($con,"INSERT INTO factures SET 
+				total_vente = '".addslashes($_POST['total'])."',
+				id_achatvente = $id_achatvente
+			") or die(mysqli_error($con));
+
+			$id_facture = mysqli_insert_id($con);
+			mysqli_query($con,"INSERT INTO lignesfactures SET 
+				total_vente = '".addslashes($_POST['total'])."',
+				quantite = $nbre_article,
+				id_facture = $id_facture
+			") or die(mysqli_error($con));
+
+			foreach ($ventes as $key => $vente) {
+				mysqli_query($con,"INSERT INTO ligneachatsventes SET 
+					quantite = $vente->quantite,
+					total_vente = $vente->total,
+					id_produit = $vente->id,
+					id_commande = $id_achatvente
+				") or die(mysqli_error($con));
+
+				mysqli_query($con,
+					"UPDATE produits SET 
+						quantite = quantite - $vente->quantite
+					WHERE id = $vente->id
+				") or die(mysqli_error($con));
+
+				mysqli_query($con,
+				"UPDATE stockes SET 
+					quantite_stocke = quantite_stocke - $vente->quantite
+				WHERE id_produit = $vente->id
+				") or die(mysqli_error($con));
+			}
+			echo 2;
+		}
 ?>
 
