@@ -39,19 +39,7 @@
 			$jTableResult = array();
 			$jTableResult = $rows;
 			print json_encode($jTableResult);
-    }elseif($_POST['method']=="creer"){	
-		mysqli_query($con,"INSERT INTO ligneachatsventes SET 
-				
-				quantite = '".addslashes($_POST['quantite'])."',
-				total = '".addslashes($_POST['total'])."',
-				date_achat = '".addslashes($_POST['date_achat'])."',
-				id_produit = '".$_POST['id_categorie']."',
-			") or die(mysqli_error($con));
-		echo 2;
-	
-		// Selection de la dernière action en base
-		// Contrainte {id}
-		}
+    }
 		/* Enregistrer une vente */
 		elseif($_POST['method']=="enregistrervente"){
 			$ventes = json_decode(stripslashes($_POST['vente']));
@@ -99,6 +87,23 @@
 				") or die(mysqli_error($con));
 			}
 			echo 2;
+		}
+
+		/* Ajouter un stocke*/
+		elseif($_POST['method']=="ajoutstocke"){
+			$quantite = $_POST['quantite'];
+			mysqli_query($con,
+					"UPDATE produits SET 
+						quantite = quantite + $quantite
+					WHERE id = '".$_POST['id']."'
+				") or die(mysqli_error($con));
+
+				mysqli_query($con,
+				"UPDATE stockes SET 
+					quantite_stocke = quantite_stocke + $quantite
+				WHERE id_produit = '".$_POST['id']."'
+				") or die(mysqli_error($con));
+			echo 1;
 		}
 ?>
 
