@@ -23,7 +23,7 @@
                             ligneachatsventes.total_vente as total_vente,
 							ligneachatsventes.quantite as quantite_vente,
 							produits.quantite as quantite_stocke,
-							categories.designation
+							produits.designation
 						FROM ligneachatsventes, produits, categories, stations
 						WHERE ligneachatsventes.date_vente = DATE_ADD(CURDATE(), INTERVAL -1 DAY)
 						AND ligneachatsventes.id_produit = produits.id
@@ -52,7 +52,7 @@
                             SUM(ligneachatsventes.total_vente) as total_vente,
 							ligneachatsventes.quantite as quantite_vente,
 							produits.quantite as quantite_stocke,
-							categories.designation
+							produits.designation
 						FROM ligneachatsventes, produits, categories, stations
 						WHERE MONTH(date_vente) = MONTH(CURRENT_DATE())
 						AND YEAR(date_vente) = YEAR(CURRENT_DATE())
