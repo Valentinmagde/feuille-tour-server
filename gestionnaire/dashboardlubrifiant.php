@@ -20,16 +20,16 @@
 						$con,
 						"SELECT
                             COUNT(ligneachatsventes.id) as nb,
-                            SUM(ligneachatsventes.total_vente) as total_vente,
+                            ligneachatsventes.total_vente as total_vente,
 							ligneachatsventes.quantite as quantite_vente,
 							produits.quantite as quantite_stocke,
 							categories.designation
 						FROM ligneachatsventes, produits, categories, stations
-						WHERE ligneachatsventes.date_vente = CURDATE()-1
+						WHERE ligneachatsventes.date_vente = DATE_ADD(CURDATE(), INTERVAL -1 DAY)
 						AND ligneachatsventes.id_produit = produits.id
                         AND produits.id_categorie = categories.id
 						AND produits.id_station = '".$_POST['idstation']."'
-						GROUP BY categories.id
+						GROUP BY ligneachatsventes.id
                     ") or die(mysqli_error($con));
 
             $rows = [];
