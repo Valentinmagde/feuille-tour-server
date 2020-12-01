@@ -28,6 +28,7 @@
 						WHERE ligneachatsventes.date_vente = CURDATE()-1
 						AND ligneachatsventes.id_produit = produits.id
                         AND produits.id_categorie = categories.id
+						AND categories.designation = 'Lubrifiant'
 						AND produits.id_station = '".$_POST['idstation']."'
 						GROUP BY categories.id
                     ") or die(mysqli_error($con));
@@ -58,8 +59,29 @@
 						AND YEAR(date_vente) = YEAR(CURRENT_DATE())
 						AND ligneachatsventes.id_produit = produits.id
                         AND produits.id_categorie = categories.id
+						AND categories.designation = 'Lubrifiant'
 						AND produits.id_station = '".$_POST['idstation']."'
 						GROUP BY categories.id
+                    ") or die(mysqli_error($con));
+
+            $rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+			    $rows[] = $row;
+			}
+		   //Return result to jTable
+			$jTableResult = array();
+			$jTableResult = $rows;
+			print json_encode($jTableResult);
+	}
+	if($_POST['method']=="getstockproductbycategorybyday"){
+		$result = mysqli_query(
+						$con,
+						"SELECT produits.quantite FROM  produits, categories, stations
+						WHERE  categories.designation = 'Lubrifiant'
+						AND produits.id_categorie = categories.id
+						AND produits.id_station = '".$_POST['idstation']."'
+						GROUP BY produits.id
                     ") or die(mysqli_error($con));
 
             $rows = [];
