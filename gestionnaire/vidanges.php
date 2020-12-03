@@ -36,6 +36,10 @@
 			qualite_huile = '".addslashes($_POST['qualitehuile'])."',
 			filtre = '".addslashes($_POST['filtre'])."',
 			date_vidange = '".addslashes($_POST['datevidange'])."',
+			nom_client = '".addslashes($_POST['nomprenom'])."',
+			telephone_client = '".addslashes($_POST['telephone'])."',
+			marque_engin = '".addslashes($_POST['marqueengin'])."',
+			type_filtre = '".addslashes($_POST['typefiltre'])."',
 			id_station = '".$_POST['listestations']."'
 		") or die(mysqli_error($con));
 	echo 2;

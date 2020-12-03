@@ -33,6 +33,9 @@
 	}elseif($_POST['method']=="creer"){	
 	mysqli_query($con,"INSERT INTO lavages SET 
 			imatricule_engin = '".addslashes($_POST['immatricule'])."',
+			nom_client = '".addslashes($_POST['nomprenom'])."',
+			telephone_client = '".addslashes($_POST['telephone'])."',
+			marque_engin = '".addslashes($_POST['marqueengin'])."',
 			prix = '".addslashes($_POST['prix'])."',
 			type_engin = '".addslashes($_POST['typeengin'])."',
 			date_lavage = '".addslashes($_POST['datelavage'])."',

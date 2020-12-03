@@ -25,12 +25,12 @@
 							produits.quantite as quantite_stocke,
 							produits.designation
 						FROM ligneachatsventes, produits, categories, stations
-						WHERE ligneachatsventes.date_vente = DATE_ADD(CURDATE(), INTERVAL -1 DAY)
+						WHERE ligneachatsventes.date_vente = CURDATE()
 						AND ligneachatsventes.id_produit = produits.id
                         AND produits.id_categorie = categories.id
 						AND categories.designation = 'Lubrifiant'
 						AND produits.id_station = '".$_POST['idstation']."'
-						GROUP BY ligneachatsventes.id
+						GROUP BY ligneachatsventes.id_produit
                     ") or die(mysqli_error($con));
 
             $rows = [];
@@ -77,7 +77,7 @@
 	if($_POST['method']=="getstockproductbycategorybyday"){
 		$result = mysqli_query(
 						$con,
-						"SELECT produits.quantite FROM  produits, categories, stations
+						"SELECT produits.quantite, produits.designation FROM  produits, categories, stations
 						WHERE  categories.designation = 'Lubrifiant'
 						AND produits.id_categorie = categories.id
 						AND produits.id_station = '".$_POST['idstation']."'
